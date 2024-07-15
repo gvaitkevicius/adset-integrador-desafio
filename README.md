@@ -49,10 +49,8 @@ Após terminar seu teste submeta um pull request e aguarde seu feedback.
   
   
  
- Utilização do padrão de projeto IRepository.
-
-Motivo do IRepository:
-Separação das preocupações, permitindo que a lógica de acesso a dados fique isolada da lógica de negócios.
+ Utilização do padrão de projeto Repository Pattern.
+   - O Repository Pattern ajuda a separar a lógica de acesso a dados da lógica de negócios, tornando o código mais modular e fácil de testar..
 
 ## Funções Pendentes
 - Seleção por veículo de apenas um pacote para cada portal iCarros e WebMotors
