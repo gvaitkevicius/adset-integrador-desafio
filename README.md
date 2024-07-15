@@ -44,12 +44,11 @@ Motivo do IRepository:
 Separação das preocupações, permitindo que a lógica de acesso a dados fique isolada da lógica de negócios.
 
 ## Funções Pendentes
-- Salvar Foto
-   -Como faria: Armazenaria as imagens como BLOB no banco de dados. Na aplicação web, as imagens seriam convertidas de BLOBs para base64 para exibição.
-  
-- Editar Veículo
-  -Implementação: Utilizaria a mesma tela de criação para a edição, passando o ID do veículo a ser editado. No momento de salvar, realizaria um update no registro existente.
+- Seleção por veículo de apenas um pacote para cada portal iCarros e WebMotors
 
-- Ajustes no Layout Conforme o Arquivo adset-layout.ai
-  -Desafios: Não consegui uma solução ideal para converter diretamente o arquivo .ai para HTML. Portanto, recriei o layout no olhômetro, porem priorizando as funcionalidades principais e não fazendo por completo.
+- Salvar Foto - Como faria: Armazenaria as imagens como BLOB no banco de dados. Na aplicação web, as imagens seriam convertidas de BLOBs para base64 para exibição.
+  
+- Editar Veículo - Implementação: Utilizaria a mesma tela de criação para a edição, passando o ID do veículo a ser editado. No momento de salvar, realizaria um update no registro existente.
+
+- Layout - Não consegui uma solução ideal para converter diretamente o arquivo .ai para HTML. Portanto, recriei o layout no olhômetro, porem priorizando as funcionalidades principais e não fazendo por completo.
 
