@@ -33,9 +33,9 @@ Após terminar seu teste submeta um pull request e aguarde seu feedback.
 * Lembre-se de fazer um fork deste repositório! Apenas cloná-lo vai te impedir de criar o pull request e dificultar a entrega;
 
 ## Tecnologias: 
- ASP NET CORE MVC
- .NET 8.0
- Visual Studio 22
+- ASP NET CORE MVC
+- .NET 8.0
+- Visual Studio 22
 
 ## Funções e Libs Implementadas
 - Funcionalidade para incluir, consultar, excluir e cadastro de carros.
