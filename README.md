@@ -31,3 +31,25 @@ Após terminar seu teste submeta um pull request e aguarde seu feedback.
 
 ## Notas:
 * Lembre-se de fazer um fork deste repositório! Apenas cloná-lo vai te impedir de criar o pull request e dificultar a entrega;
+
+## Funções Implementadas
+ Funcionalidade para incluir, consultar, excluir e cadastro de carros.
+ Filtro de consulta conforme solicitado.
+ Estrutura de dados separada em um projeto Class Library.
+ API RESTful (CarApiController) para demonstrar o uso de APIs.
+ Exemplo de WebService SOAP (não utilizado na aplicação, mas presente para demonstração).
+ Utilização do padrão de projeto IRepository.
+
+Motivo do IRepository:
+Separação das preocupações, permitindo que a lógica de acesso a dados fique isolada da lógica de negócios.
+
+## Funções Pendentes
+- Salvar Foto
+   Como faria: Armazenaria as imagens como BLOB no banco de dados. Na aplicação web, as imagens seriam convertidas de BLOBs para base64 para exibição.
+  
+- Editar Veículo
+  Implementação: Utilizaria a mesma tela de criação para a edição, passando o ID do veículo a ser editado. No momento de salvar, realizaria um update no registro existente.
+
+- Ajustes no Layout Conforme o Arquivo adset-layout.ai
+  Desafios: Não consegui uma solução ideal para converter diretamente o arquivo .ai para HTML. Portanto, recriei o layout no olhômetro, porem priorizando as funcionalidades principais e não fazendo por completo.
+
