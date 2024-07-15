@@ -32,12 +32,23 @@ Após terminar seu teste submeta um pull request e aguarde seu feedback.
 ## Notas:
 * Lembre-se de fazer um fork deste repositório! Apenas cloná-lo vai te impedir de criar o pull request e dificultar a entrega;
 
-## Funções Implementadas
- Funcionalidade para incluir, consultar, excluir e cadastro de carros.
- Filtro de consulta conforme solicitado.
- Estrutura de dados separada em um projeto Class Library.
- API RESTful (CarApiController) para demonstrar o uso de APIs.
- Exemplo de WebService SOAP (não utilizado na aplicação, mas presente para demonstração).
+## Tecnologias: 
+ ASP NET CORE MVC
+ .NET 8.0
+ Visual Studio 22
+
+## Funções e Libs Implementadas
+- Funcionalidade para incluir, consultar, excluir e cadastro de carros.
+- Filtro de consulta conforme solicitado.
+- Estrutura de dados separada em um projeto Class Library.
+- API RESTful (CarApiController) para demonstrar o uso de APIs.
+- Exemplo de WebService SOAP (não utilizado na aplicação, mas presente para demonstração).
+- Entity Framework e Code First
+- No create do veiculo foi utilizado LINQ
+- HTML E CSS, junto com JS e boostrap
+  
+  
+ 
  Utilização do padrão de projeto IRepository.
 
 Motivo do IRepository:
