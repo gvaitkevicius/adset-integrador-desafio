@@ -1,0 +1,173 @@
+﻿@model AdSetIntegrador.Data.Entities.Car
+
+@{
+    ViewData["Title"] = "Cadastrar Novo Carro";
+}
+
+<h1>Cadastrar Novo Carro</h1>
+
+<form id="createCarForm" asp-action="Create" method="post" enctype="multipart/form-data" onsubmit="return validateForm()" style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
+
+    <div class="form-group">
+        <label for="Marca">Marca:</label>
+        <input type="text" class="form-control" id="Marca" name="Marca" required>
+    </div>
+    <div class="form-group">
+        <label for="Modelo">Modelo:</label>
+        <input type="text" class="form-control" id="Modelo" name="Modelo" required>
+    </div>
+    <div class="form-group">
+        <label for="Ano">Ano:</label>
+        <input type="number" class="form-control" id="Ano" name="Ano" required>
+    </div>
+    <div class="form-group">
+        <label for="Placa">Placa:</label>
+        <input type="text" class="form-control" id="Placa" name="Placa" required>
+    </div>
+    <div class="form-group">
+        <label for="Km">Quilometragem:</label>
+        <input type="number" class="form-control" id="Km" name="Km">
+    </div>
+    <div class="form-group">
+        <label for="Cor">Cor:</label>
+        <input type="text" class="form-control" id="Cor" name="Cor" required>
+    </div>
+    <div class="form-group">
+        <label for="Preco">Preço:</label>
+        <input type="number" class="form-control" id="Preco" name="Preco" step="0.01" required>
+    </div>
+    <div class="form-group">
+        <label>Opcionais:</label>
+        <div>
+            <input type="checkbox" id="ArCondicionado" name="Opcionais" value="Ar Condicionado">
+            <label for="ArCondicionado">Ar Condicionado</label>
+        </div>
+        <div>
+            <input type="checkbox" id="Alarme" name="Opcionais" value="Alarme">
+            <label for="Alarme">Alarme</label>
+        </div>
+        <div>
+            <input type="checkbox" id="Airbag" name="Opcionais" value="Airbag">
+            <label for="Airbag">Airbag</label>
+        </div>
+        <div>
+            <input type="checkbox" id="FreioABS" name="Opcionais" value="Freio ABS">
+            <label for="FreioABS">Freio ABS</label>
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <label for="Fotos">Fotos (até 15):</label>
+        <input type="file" class="form-control-file" id="Fotos" name="Fotos" accept="image/*" multiple>
+        <small id="fileHelp" class="form-text text-muted">Você pode selecionar até 15 fotos.</small>
+        <div id="preview" style="display:flex"></div>
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar Carro</button>
+</form>
+
+<a asp-controller="Car" asp-action="Index" class="btn btn-secondary mt-3">Voltar</a>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+    <script>
+        document.getElementById('Fotos').addEventListener('change', function () {
+            var preview = document.getElementById('preview');
+            preview.innerHTML = '';
+
+            var files = this.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '200px'; // Ajuste conforme necessário
+                    img.style.marginRight = '10px'; // Espaçamento entre as imagens
+
+                    // Botão para remover a imagem
+                    var removeBtn = document.createElement('button');
+                    removeBtn.textContent = 'Remover';
+                    removeBtn.classList.add('btn', 'btn-danger', 'btn-sm', 'mt-1');
+                    removeBtn.addEventListener('click', function () {
+                        this.parentNode.parentNode.removeChild(this.parentNode);
+                        // Reduz o contador de fotos selecionadas
+                        updateFileCounter(-1);
+                    });
+
+                    var div = document.createElement('div');
+                    div.appendChild(img);
+                    div.appendChild(removeBtn);
+
+                    preview.appendChild(div);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Função para validar o número máximo de fotos selecionadas
+        function validateForm() {
+            var input = document.getElementById('Fotos');
+            if (input.files.length > 15) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Você pode selecionar no máximo 15 fotos.'
+                });
+                return false; // Impede o envio do formulário
+            }
+            return true; // Permite o envio do formulário
+        }
+
+        // Evento após a submissão do formulário
+        document.getElementById('createCarForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            var form = this;
+            var formData = new FormData(form);
+
+            fetch('@Url.Action("Create", "Car")', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sucesso!',
+                            text: 'Carro cadastrado com sucesso.'
+                        }).then((result) => {
+                            if (result.isConfirmed || result.isDismissed) {
+                                window.location.href = '@Url.Action("Index", "Car")';
+                            }
+                        });
+                    } else {
+                        if (data.errors) {
+                            // Exibe erros de validação específicos
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erro!',
+                                html: data.errors.join('<br>')
+                            });
+                        } else {
+                            // Exibe mensagem de erro genérica
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erro!',
+                                text: data.message ? data.message : 'Houve um erro ao cadastrar o carro. Tente novamente mais tarde.'
+                            });
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro!',
+                        text: 'Houve um erro ao processar sua solicitação. Tente novamente mais tarde.'
+                    });
+                });
+        });
+    </script>
+}
